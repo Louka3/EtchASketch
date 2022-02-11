@@ -6,18 +6,21 @@ const gridContainer = document.querySelector("#grid-container")
 const clearButton = document.querySelector("#clear-button")
 const gridButton = document.querySelector('#new-grid-count')
 
+
 clearButton.addEventListener('click',clearBoard)
-//gridButton.addEventListener('click', newGrid.bind(this,prompt("How big do you want the grid(side length)?S")))
+gridButton.addEventListener('click', newGrid)
 
 /* Need a loop to create 16 square divs to make my Etch-A-Sketch Grid */
-for (let i = 0;i < 256; i++){
-    // for (let i = 0; i < 256; i++){
-    let square = document.createElement('div');
-    square.className = "grid-square"
-    square.addEventListener('mouseover', changeColor.bind(this, square))
-    gridContainer.append(square)
-}
+makeGrid(256)
 
+function makeGrid(squares){
+    for (let i = 0;i < squares; i++){
+        let square = document.createElement('div');
+        square.className = "grid-square"
+        square.addEventListener('mouseover', changeColor.bind(this, square))
+        gridContainer.append(square)
+}
+}
 function changeColor(square){
     square.setAttribute('style', 'background-color: orange')
 }
@@ -31,12 +34,16 @@ function clearBoard(){
     }
 }
 
-function newGrid(num){
+function newGrid(){
     //num is the number of squares per side. Default at start of program is 16
-    board = document.querySelectorAll('.grid-square')
+    let num = prompt("How big do you want the grid(side length)?")
+    makeGrid((num * num))
+    squares = document.querySelectorAll('.grid-square')
     //square root (921,600 / num^2)
-    let newGridLength = Math.sqrt(921600 / Math.pow(num, 2))
-    for (let b = 0; b < board.length; b++){
-        board[b].setAttribute('style', 'height: 10px; width: 10px')
+    let newGridLength = Math.sqrt(921600 / Math.pow(num, 2)).toFixed(1)
+    for (let b = 0; b < squares.length; b++){
+        squares[b].setAttribute('style', 'grid-template-columns: repreat(' + 
+            newGridLength.toString() + ', 1fr); grid-template-rows: repeat(' + 
+            newGridLength.toString() + ', 1fr);')
     }
 }
