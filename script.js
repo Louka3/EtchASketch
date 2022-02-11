@@ -5,13 +5,14 @@ const container = document.querySelector("#container")
 const gridContainer = document.querySelector("#grid-container")
 const clearButton = document.querySelector("#clear-button")
 const gridButton = document.querySelector('#new-grid-count')
+let currentLength = 256 //initiallized for a 16x16 square
 
 
 clearButton.addEventListener('click',clearBoard)
 gridButton.addEventListener('click', newGrid)
 
 /* Need a loop to create 16 square divs to make my Etch-A-Sketch Grid */
-makeGrid(256)
+makeGrid(currentLength)
 
 function makeGrid(squares){
     for (let i = 0;i < squares; i++){
@@ -36,9 +37,14 @@ function clearBoard(){
 
 function newGrid(){
     //num is the number of squares per side. Default at start of program is 16
+    squares = document.querySelectorAll('.grid-square')
+
+    for (let a = 0; a < squares.length; a++){
+        //gridContainer
+    }
     let num = prompt("How big do you want the grid(side length)?")
     makeGrid((num * num))
-    squares = document.querySelectorAll('.grid-square')
+    
     //square root (921,600 / num^2)
     let newGridLength = Math.sqrt(921600 / Math.pow(num, 2)).toFixed(1)
     for (let b = 0; b < squares.length; b++){
