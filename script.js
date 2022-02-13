@@ -1,22 +1,21 @@
-
-const container = document.querySelector("#container")
-const gridContainer = document.getElementById('grid-container')
+//Start with querySelectors for the buttons  
 const clearButton = document.querySelector("#clear-button")
 const gridButton = document.querySelector('#new-grid-count')
 
-
-clearButton.addEventListener('click',clearBoard)
+clearButton.addEventListener('click',clearBoardColor)
 gridButton.addEventListener('click', newGrid)
 
-makeGrid(256)
+//make the initial 16x16 board
+makeGrid(16)
 
-function makeGrid(squares){
-    let squaresPerSide = (Math.sqrt(squares));
+function makeGrid(sideLength){ //function to actually make the grid
+    let totalSquares = (sideLength * sideLength)
+    const gridContainer = document.getElementById('grid-container')
 
-    gridContainer.style.gridTemplateColumns = 'repeat($sps,1fr)'.replace('$sps', squaresPerSide)
-    gridContainer.style.gridTemplateRows = 'repeat($sps,1fr)'.replace('$sps', squaresPerSide)
+    gridContainer.style.gridTemplateColumns = 'repeat($side,1fr)'.replace('$side', sideLength)
+    gridContainer.style.gridTemplateRows = 'repeat($side,1fr)'.replace('$side', sideLength)
   
-    for (let i = 0;i < squares; i++){
+    for (let i = 0;i < totalSquares; i++){
         let square = document.createElement('div');
         square.className = "grid-square"
         square.addEventListener('mouseover', changeColor.bind(this, square))
@@ -24,11 +23,11 @@ function makeGrid(squares){
     }
 }
 
-function changeColor(square){
+function changeColor(square){ //function to change square color on hover
     square.setAttribute('style', 'background-color: orange')
 }
 
-function clearBoard(){
+function clearBoardColor(){ //function to clear the board of color
     board = document.querySelectorAll('.grid-square')
     /* need to treat this as an array and iterate thru it to assign each square a
     background color of transparent */
@@ -37,8 +36,8 @@ function clearBoard(){
     }
 }
 
-function newGrid(){
+function newGrid(){ //function to make a new grid with custom side length
+    let num = prompt("How big do you want each side of the grid(up to 100)?") 
     document.querySelectorAll('.grid-square').forEach(sq => sq.remove());
-    let num = prompt("How big do you want the grid(side length)?")
-    makeGrid((num * num))    
+    makeGrid(num) 
 }
