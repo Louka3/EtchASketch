@@ -24,7 +24,8 @@ function makeGrid(sideLength){ //function to actually make the grid
 }
 
 function changeColor(square){ //function to change square color on hover
-    square.setAttribute('style', 'background-color: orange')
+    let randColor = randomColor()
+    square.setAttribute('style', 'background-color: rgb'.replace('rgb',randColor))
 }
 
 function clearBoardColor(){ //function to clear the board of color
@@ -40,4 +41,12 @@ function newGrid(){ //function to make a new grid with custom side length
     let num = prompt("How big do you want each side of the grid(up to 100)?") 
     document.querySelectorAll('.grid-square').forEach(sq => sq.remove());
     makeGrid(num) 
+}
+
+function randomColor(){
+    let red = Math.floor(Math.random() * 255);
+    let green = Math.floor(Math.random() * 255);
+    let blue = Math.floor(Math.random() * 255);
+    let rgb = "rgb(" + red + "," + green + "," + blue +")"
+    return rgb
 }

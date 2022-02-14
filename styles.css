@@ -1,5 +1,5 @@
 body{
-    background-color: lightslategray;
+    background-color: rgb(238, 228, 228);
 }
 #container{
     display: flex;
@@ -14,13 +14,7 @@ body{
     display: grid;
     width: 800px;
     height: 800px;
-    /* grid-template-columns: repeat(16, 1fr) ;
-    grid-template-rows: repeat(16, 1fr); */
     border: 4px solid rgb(75,0,130); 
-    /* align-items: center;
-    flex-wrap: wrap; */
-    
-    
 }
 .grid-square{
     outline:2px solid rgb(75,0,130);
